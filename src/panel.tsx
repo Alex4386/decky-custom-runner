@@ -31,7 +31,9 @@ interface TerminalResult {
   title?: string;
 }
 
-const SidePanel: VFC = ({}) => {
+const SidePanel: VFC<{
+  serverAPI: ServerAPI
+}> = ({ serverAPI }) => {
   // 
 
   // const onClick = async () => {

@@ -1,7 +1,7 @@
 {
-  "name": "decky-terminal",
-  "version": "0.3.0",
-  "description": "A long-awaited terminal plugin that turns your steamdeck into Linux battlestation.",
+  "name": "decky-proton-runner",
+  "version": "0.0.1",
+  "description": "Run custom binaries or launchers in game-mode!",
   "scripts": {
     "build": "shx rm -rf dist && rollup -c",
     "watch": "rollup -c -w",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Alex4386/decky-terminal"
+    "url": "git+https://github.com/Alex4386/decky-proton-runner"
   },
   "keywords": [
     "decky",
@@ -23,9 +23,9 @@
   "author": "Alex4386 <psh010209@gmail.com>",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/Alex4386/decky-terminal/issues"
+    "url": "https://github.com/Alex4386/decky-proton-runner/issues"
   },
-  "homepage": "https://github.com/Alex4386/decky-terminal#readme",
+  "homepage": "https://github.com/Alex4386/decky-proton-runner#readme",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.1.0",
     "@rollup/plugin-json": "^4.1.0",

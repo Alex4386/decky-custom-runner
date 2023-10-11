@@ -11,7 +11,7 @@ import SettingsPage from "./settings/SettingsPage";
 const Settings: VFC = () => {
   return (
     <SidebarNavigation
-      title="Decky Terminal"
+      title="Decky ProtonRunner"
       showTitle={true}
       pages={[
         {
