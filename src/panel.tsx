@@ -14,6 +14,7 @@ import {
   staticClasses,
   Button,
   TextField,
+  TextFieldProps,
 } from "decky-frontend-lib";
 import { useEffect, useRef, useState, VFC } from "react";
 import { FaCog, FaPlus, FaTimesCircle } from "react-icons/fa";
@@ -56,6 +57,14 @@ const SidePanel: VFC<{
     if (protonData.success) setProtonPath(protonData.result);
   }
 
+  const startPicker = async (startPath: string) => {
+    const res = await serverAPI.openFilePicker(startPath, true);
+    if (res) {
+      setTargetPath(res.realpath);
+      (filePathRef.current as TextFieldProps).value = res.realpath;
+    }
+  }
+
   const ModTextField = TextField as any;
 
   return <div style={{ boxSizing: 'border-box', width: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -63,8 +72,8 @@ const SidePanel: VFC<{
       appId ? <PanelSection title={'App ID: '+appId}>
         <ModTextField ref={filePathRef} onChange={(e: any) => setTargetPath(e.target.value)} />
         <Focusable style={{ marginRight: '.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-          {gamePath && <Button onClick={() => serverAPI.openFilePicker(gamePath)}>Open GamePath</Button>}
-          {protonPath && <Button onClick={() => serverAPI.openFilePicker(protonPath as string)}>Open ProtonPath</Button>}
+          {gamePath && <DialogButton onClick={() => startPicker(gamePath)}>Open GamePath</DialogButton>}
+          {protonPath && <DialogButton onClick={() => startPicker(protonPath as string)}>Open ProtonPath</DialogButton>}
         </Focusable>
       </PanelSection> : <div style={{ height: '100%', display: 'flex', flexDirection: 'row', alignItems: 'stretch' }}>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
