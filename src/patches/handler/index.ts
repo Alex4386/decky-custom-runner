@@ -12,7 +12,7 @@ const appPageHandler =
       props.children.props,
       'renderFunc',
       (_: Record<string, any>[], re: ReactElement) => {
-        console.log('renderFuncTriggered!', props.path, re);
+        console.log('renderFuncTriggered!', props, props.path, re);
         return re;
       }
     )
