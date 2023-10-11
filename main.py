@@ -60,8 +60,9 @@ class Plugin:
             f.close()
 
             if install_dir is not None:
-                if os.path.exists(base_dir, "common", install_dir):
-                    return os.path.join(base_dir, "common", install_dir)
+                target_install_dir = os.path.join(base_dir, "common", install_dir)
+                if os.path.exists(target_install_dir):
+                    return target_install_dir
 
         return None
 
