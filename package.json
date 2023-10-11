@@ -1,5 +1,5 @@
 {
-  "name": "decky-proton-runner",
+  "name": "decky-custom-runner",
   "version": "0.0.1",
   "description": "Run custom binaries or launchers in game-mode!",
   "scripts": {
