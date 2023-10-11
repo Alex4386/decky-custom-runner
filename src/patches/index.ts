@@ -1,5 +1,5 @@
 import { RoutePatch, ServerAPI } from "decky-frontend-lib";
-import propertiesPatcher from "./properties";
+import appPageHandler from "./handler";
 
 interface PatchInfo {
     path: string;
@@ -9,9 +9,7 @@ interface PatchInfo {
 const registeredPatches: PatchInfo[] = [];
 
 export function registerPatches(serverAPI: ServerAPI) {
-    patch(serverAPI, '/library/app/:appid', propertiesPatcher)
-    patch(serverAPI, '', propertiesPatcher)
-    patch(serverAPI, '/app/:appid/properties', propertiesPatcher)
+    patch(serverAPI, '/library/app/:appid', appPageHandler)
 }
 
 export function unregisterPatches(serverAPI: ServerAPI) {

@@ -15,7 +15,7 @@ import {
 } from "decky-frontend-lib";
 import { useState, VFC } from "react";
 import { FaCog, FaPlus, FaTimesCircle } from "react-icons/fa";
-import TerminalGlobal from "./common/global";
+import ProtonRunnerGlobal from "./common/global";
 
 // interface AddMethodArgs {
 //   left: number;
@@ -52,7 +52,7 @@ const SidePanel: VFC<{
   const [result, setResult] = useState<TerminalResult[]>([]);
 
   const getTerminals = async () => {
-    const serverAPI = TerminalGlobal.getServer();
+    const serverAPI = ProtonRunnerGlobal.getServer();
 
     const result = await serverAPI.callPluginMethod<{}, TerminalResult[]>(
       "get_terminals",
@@ -66,7 +66,7 @@ const SidePanel: VFC<{
   }
 
   const createTerminal = async () => {
-    const serverAPI = TerminalGlobal.getServer();
+    const serverAPI = ProtonRunnerGlobal.getServer();
 
     const result = await serverAPI.callPluginMethod<{}, boolean>(
       "create_terminal",
@@ -81,7 +81,7 @@ const SidePanel: VFC<{
   }
 
   const removeTerminal = async (id: string) => {
-    const serverAPI = TerminalGlobal.getServer();
+    const serverAPI = ProtonRunnerGlobal.getServer();
 
     const result = await serverAPI.callPluginMethod<{}, boolean>(
       "remove_terminal",

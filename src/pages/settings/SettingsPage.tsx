@@ -3,7 +3,7 @@ import {
     Focusable, SteamSpinner, TextField, ToggleField, staticClasses,
   } from "decky-frontend-lib";
 import { VFC, useEffect, useState } from "react";
-import TerminalGlobal from "../../common/global";
+import ProtonRunnerGlobal from "../../common/global";
   
 
 const SettingsPage: VFC = () => {

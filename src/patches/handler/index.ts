@@ -2,15 +2,17 @@ import {
     afterPatch, ServerAPI, SidebarNavigation
 } from 'decky-frontend-lib';
 import { ReactElement, VFC } from 'react';
+import ProtonRunnerGlobal from '../../common/global';
 
-const propertiesPatcher = 
+const appPageHandler = 
   (props: { path: string; children: ReactElement }) => {
-    console.log('propPatched!', props.path, props.children);
+
+    // add hook for app page
     afterPatch(
       props.children.props,
       'renderFunc',
       (_: Record<string, any>[], re: ReactElement) => {
-        console.log('renderFuncTriggered!', re);
+        console.log('renderFuncTriggered!', props.path, re);
         return re;
       }
     )
@@ -18,4 +20,4 @@ const propertiesPatcher =
     return props
   }
 
-export default propertiesPatcher;
+export default appPageHandler;

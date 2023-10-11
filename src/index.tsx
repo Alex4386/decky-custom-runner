@@ -8,11 +8,11 @@ import { FaTerminal } from "react-icons/fa";
 
 import { registerRoutes, unregisterRoutes } from "./routes";
 import SidePanel from "./panel";
-import TerminalGlobal from "./common/global";
+import ProtonRunnerGlobal from "./common/global";
 import { registerPatches, unregisterPatches } from "./patches";
 
 export default definePlugin((serverApi: ServerAPI) => {
-  TerminalGlobal.setServer(serverApi);
+  ProtonRunnerGlobal.setServer(serverApi);
   registerRoutes(serverApi.routerHook);
   registerPatches(serverApi);
 
