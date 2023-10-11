@@ -1,5 +1,5 @@
 import {
-    afterPatch, ServerAPI, SidebarNavigation, useParams
+    afterPatch, ServerAPI, SidebarNavigation
 } from 'decky-frontend-lib';
 import { ReactElement, VFC } from 'react';
 import ProtonRunnerGlobal from '../../common/global';
@@ -12,8 +12,7 @@ const appPageHandler =
       props.children.props,
       'renderFunc',
       (_: Record<string, any>[], re: ReactElement) => {
-        const params = useParams()
-        console.log('renderFuncTriggered!', params, props.path, re);
+        console.log('renderFuncTriggered!', location.href, props.path, re);
         return re;
       }
     )
