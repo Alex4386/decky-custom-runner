@@ -24,7 +24,7 @@ class Plugin:
         return os.path.join(os.path.expanduser("~"), ".local", "share", "Steam")
     
     async def get_target_dirs(self) -> str:
-        dirs = [ await self.get_home_steam_dir() ]
+        dirs = [ await Plugin.get_home_steam_dir(self) ]
 
         sd_dir = os.path.join("/run/medai", "mmcblk0p1")
         if os.path.exists(sd_dir):
@@ -34,7 +34,7 @@ class Plugin:
     
     async def get_base_dir(self, id: int, target_dirs: List[str] = None) -> Optional[str]:
         if target_dirs is None:
-            target_dirs = [await self.get_home_steam_dir()]
+            target_dirs = [await Plugin.get_home_steam_dir(self)]
 
         for target_dir in target_dirs:
             path = os.path.join(target_dir, "steamapps", "appmanifest_"+str(id)+".acf")
@@ -46,7 +46,7 @@ class Plugin:
         return None
 
     async def get_game_dir(self, id: int, target_dirs: List[str] = None) -> Optional[str]:
-        base_dir = await self.get_base_dir(id, target_dirs)
+        base_dir = await Plugin.get_base_dir(self, id, target_dirs)
         if base_dir is None:
             return None
         
@@ -66,14 +66,14 @@ class Plugin:
         return None
 
     async def get_proton_compat_dir(self, id: int, target_dirs: List[str] = None) -> Optional[str]:
-        base_dir = await self.get_base_dir(id, target_dirs)
+        base_dir = await Plugin.get_base_dir(self, id, target_dirs)
         if base_dir is None:
             return None
         
         return os.path.join(base_dir, "steamapps", "compatdata", str(id), "pfx")
 
-    async def has_proton(self, id: int) -> bool:
-        compat_dir = await self.get_proton_compat_dir(id)
+    async def has_proton(self, id: int, target_dirs: List[str] = None) -> bool:
+        compat_dir = await Plugin.get_proton_compat_dir(self, id, target_dirs)
         return os.path.exists(compat_dir)
 
 
