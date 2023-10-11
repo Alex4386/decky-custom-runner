@@ -20,6 +20,7 @@ class ProtonRunnerGlobal {
     }
 
     static setAppId(appId: number) {
+        console.log('appId updated:', appId);
         this.currentAppId = appId;
     }
 }
