@@ -40,6 +40,8 @@ const SidePanel: VFC<{
       target_dirs,
     });
 
+    console.log('fetchContent', appId, config)
+
     if (config.success) {
       setGamePath(config.result as string);
     }
@@ -50,9 +52,11 @@ const SidePanel: VFC<{
       appId ? <PanelSection title={'App ID: '+appId}>
         <Button onClick={() => serverAPI.openFilePicker('~')}>Open File</Button>
         <div>{gamePath}</div>
-      </PanelSection> : <div style={{ height: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-        <div className={staticClasses.Title}>Not Selected</div>
-        <div>Application was not selected</div>
+      </PanelSection> : <div style={{ height: '100%', display: 'flex', flexDirection: 'row', alignItems: 'stretch' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+          <div className={staticClasses.Title}>Not Selected</div>
+          <div>Application was not selected</div>
+        </div>
       </div>
     }
   </div>;
