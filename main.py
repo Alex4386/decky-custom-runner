@@ -1,6 +1,7 @@
 import sys
 import asyncio
 import random
+import os
 from typing import List, Optional
 
 try:
@@ -8,14 +9,8 @@ try:
 except ImportError:
     pass
 
-try:
-    from decky_terminal import DeckyTerminal
-except Exception as e:
-    print('[DeckyTerminal] Import Failed:', type(e), e)
-    raise e
-
 class Plugin:
-    decky_terminal = DeckyTerminal()
+
 
     # Asyncio-compatible long-running code, executed in a task when the plugin is loaded
     async def _main(self):
@@ -24,6 +19,63 @@ class Plugin:
     # Function called first during the unload process, utilize this to handle your plugin being removed
     async def _unload(self):
         decky_plugin.logger.info("Goodbye World!")
+
+    async def get_home_steam_dir(self) -> str:
+        return os.path.join(os.path.expanduser("~"), ".local", "share", "Steam")
+    
+    async def get_target_dirs(self) -> str:
+        dirs = [ await self.get_home_steam_dir() ]
+
+        sd_dir = os.path.join("/run/medai", "mmcblk0p1")
+        if os.path.exists(sd_dir):
+            dirs.append(sd_dir)
+
+        return dirs
+    
+    async def get_base_dir(self, id: int, target_dirs: List[str] = None) -> Optional[str]:
+        if target_dirs is None:
+            target_dirs = [await self.get_home_steam_dir()]
+
+        for target_dir in target_dirs:
+            path = os.path.join(target_dir, "steamapps", "appmanifest_"+str(id)+".acf")
+            if os.path.exists(path):
+                return target_dir
+            elif os.path.exists(os.path.join(target_dir, "steamapps", "compatdata", str(id))):
+                return target_dir
+
+        return None
+
+    async def get_game_dir(self, id: int, target_dirs: List[str] = None) -> Optional[str]:
+        base_dir = await self.get_base_dir(id, target_dirs)
+        if base_dir is None:
+            return None
+        
+        path = os.path.join(base_dir, "steamapps", "appmanifest_"+str(id)+".acf")
+        if os.path.exists(path):
+            f = open(path)
+            install_dir = None
+            for o in f.readlines():
+                if '"installdir"' in o:
+                    install_dir = o.strip().replace('"installdir"', "").strip()[1:-1]
+            f.close()
+
+            if install_dir is not None:
+                if os.path.exists(base_dir, "common", install_dir):
+                    return os.path.join(base_dir, "common", install_dir)
+
+        return None
+
+    async def get_proton_compat_dir(self, id: int, target_dirs: List[str] = None) -> Optional[str]:
+        base_dir = await self.get_base_dir(id, target_dirs)
+        if base_dir is None:
+            return None
+        
+        return os.path.join(base_dir, "steamapps", "compatdata", str(id), "pfx")
+
+    async def has_proton(self, id: int) -> bool:
+        compat_dir = await self.get_proton_compat_dir(id)
+        return os.path.exists(compat_dir)
+
 
     # Migrations that should be performed before entering `_main()`.
     async def _migration(self):
