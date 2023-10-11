@@ -64,7 +64,7 @@ const SidePanel: VFC<{
         <ModTextField ref={filePathRef} onChange={(e: any) => setTargetPath(e.target.value)} />
         <Focusable style={{ marginRight: '.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
           {gamePath && <Button onClick={() => serverAPI.openFilePicker(gamePath)}>Open GamePath</Button>}
-          {gamePath && <Button onClick={() => serverAPI.openFilePicker(protonPath)}>Open ProtonPath</Button>}
+          {protonPath && <Button onClick={() => serverAPI.openFilePicker(protonPath as string)}>Open ProtonPath</Button>}
         </Focusable>
       </PanelSection> : <div style={{ height: '100%', display: 'flex', flexDirection: 'row', alignItems: 'stretch' }}>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
