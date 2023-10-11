@@ -10,6 +10,7 @@ const registeredPatches: PatchInfo[] = [];
 
 export function registerPatches(serverAPI: ServerAPI) {
     patch(serverAPI, '/library/app/:appid', appPageHandler)
+    patch(serverAPI, '/app/:appid/properties/:propType', appPageHandler)
 }
 
 export function unregisterPatches(serverAPI: ServerAPI) {
