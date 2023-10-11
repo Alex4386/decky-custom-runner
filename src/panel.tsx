@@ -35,23 +35,29 @@ const SidePanel: VFC<{
 
   const fetchContent = async () => {
     const target_dirs = (await SteamClient.InstallFolder.GetInstallFolders()).map((n: any) => n.strFolderPath);
-    const config = await serverAPI.callPluginMethod<{}, string>("get_game_dir", {
-      id: appId,
-      target_dirs,
-    });
+    const [gamedirData, protonData] = await Promise.all([
+      serverAPI.callPluginMethod<{}, string>("get_game_dir", {
+        id: appId,
+        target_dirs,
+      }), 
+      serverAPI.callPluginMethod<{}, string>("get_proton_compat_dir", {
+        id: appId,
+        target_dirs,
+      }), 
+    ]);
 
-    console.log('fetchContent', appId, config)
+    console.log('fetchContent', appId, gamedirData, protonData);
 
-    if (config.success) {
-      setGamePath(config.result as string);
-    }
+    if (gamedirData.success) setGamePath(gamedirData.result);
+    if (protonData.success) setProtonPath(protonData.result);
   }
 
   return <div style={{ boxSizing: 'border-box', width: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
     {
       appId ? <PanelSection title={'App ID: '+appId}>
         <Button onClick={() => serverAPI.openFilePicker('~')}>Open File</Button>
-        <div>{gamePath}</div>
+        <div>Game: {gamePath}</div>
+        <div>Proton: {gamePath}</div>
       </PanelSection> : <div style={{ height: '100%', display: 'flex', flexDirection: 'row', alignItems: 'stretch' }}>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
           <div className={staticClasses.Title}>Not Selected</div>
