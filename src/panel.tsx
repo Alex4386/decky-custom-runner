@@ -23,64 +23,15 @@ import ProtonRunnerGlobal from "./common/global";
 const SidePanel: VFC<{
   serverAPI: ServerAPI
 }> = ({ serverAPI }) => {
-
   const appId = ProtonRunnerGlobal.getAppId();
-
-  const [gamePath, setGamePath] = useState<string | null | undefined>(undefined);
-  const [protonPath, setProtonPath] = useState<string | null | undefined>(undefined);
-
-  const [targetPath, setTargetPath] = useState<string | undefined>(undefined);
-  const filePathRef = useRef<typeof TextField | undefined>();
-
-  useEffect(() => {
-    if (appId && (gamePath === undefined && protonPath === undefined)) {
-      fetchContent();
-    }
-  })
-
-  const fetchContent = async () => {
-    const target_dirs = (await SteamClient.InstallFolder.GetInstallFolders()).map((n: any) => n.strFolderPath);
-    const [gamedirData, protonData] = await Promise.all([
-      serverAPI.callPluginMethod<{}, string>("get_game_dir", {
-        id: appId,
-        target_dirs,
-      }), 
-      serverAPI.callPluginMethod<{}, string>("get_proton_compat_dir", {
-        id: appId,
-        target_dirs,
-      }), 
-    ]);
-
-    console.log('fetchContent', appId, gamedirData, protonData);
-
-    if (gamedirData.success) setGamePath(gamedirData.result);
-    if (protonData.success) setProtonPath(protonData.result);
-  }
-
-  const startPicker = async (startPath: string) => {
-    const res = await serverAPI.openFilePicker(startPath, true);
-    if (res) {
-      setTargetPath(res.realpath);
-      (filePathRef.current as TextFieldProps).value = res.realpath;
-    }
-  }
-
-  const ModTextField = TextField as any;
 
   return <div style={{ boxSizing: 'border-box', width: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
     {
       appId ? <PanelSection title={'App ID: '+appId}>
-        <ModTextField ref={filePathRef} onChange={(e: any) => setTargetPath(e.target.value)} />
         <Focusable style={{ marginRight: '.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-          {gamePath && <DialogButton onClick={() => startPicker(gamePath)}>Open GamePath</DialogButton>}
-          {protonPath && <DialogButton onClick={() => startPicker(protonPath as string)}>Open ProtonPath</DialogButton>}
+          <DialogButton onClick={() => Router.Navigate('/decky-proton-runner/app/'+appId)}>Start Custom Runner</DialogButton>
         </Focusable>
-      </PanelSection> : <div style={{ height: '100%', display: 'flex', flexDirection: 'row', alignItems: 'stretch' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-          <div className={staticClasses.Title}>Not Selected</div>
-          <div>Application was not selected</div>
-        </div>
-      </div>
+      </PanelSection> : <PanelSection title="App Not Selected" />
     }
   </div>;
 };

@@ -26,7 +26,7 @@ class Plugin:
     async def get_target_dirs(self) -> str:
         dirs = [ await Plugin.get_home_steam_dir(self) ]
 
-        sd_dir = os.path.join("/run/medai", "mmcblk0p1")
+        sd_dir = os.path.join("/run/media", "mmcblk0p1")
         if os.path.exists(sd_dir):
             dirs.append(sd_dir)
 
@@ -76,7 +76,6 @@ class Plugin:
     async def has_proton(self, id: int, target_dirs: List[str] = None) -> bool:
         compat_dir = await Plugin.get_proton_compat_dir(self, id, target_dirs)
         return os.path.exists(compat_dir)
-
 
     # Migrations that should be performed before entering `_main()`.
     async def _migration(self):
