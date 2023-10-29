@@ -4,7 +4,7 @@ import { VFC } from "react";
 import AppPage from "../pages/AppPage";
 
 export function registerRoutes(routerHook: RouterHook) {
-    routerHook.addPatch('/decky-custom-runner/app/:appId', AppPage);
+    routerHook.addRoute('/decky-custom-runner/app/:appId', AppPage);
     /*routerHook.addRoute("/decky-proton-runner/settings", Settings, {
         exact: true,
     });*/

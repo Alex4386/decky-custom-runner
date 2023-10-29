@@ -17,7 +17,7 @@ export default definePlugin((serverApi: ServerAPI) => {
   registerPatches(serverApi);
 
   return {
-    title: <div className={staticClasses.Title}>Decky Terminal</div>,
+    title: <div className={staticClasses.Title}>Custom Runner</div>,
     content: <SidePanel serverAPI={serverApi} />,
     icon: <FaTerminal />,
     onDismount() {
