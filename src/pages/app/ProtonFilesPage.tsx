@@ -34,6 +34,8 @@ const ProtonFiles: VFC<{appId: string}> = ({appId}) => {
     if (res) updatePath(res.realpath);
   }
 
+  const launchFile = async (filePath?: string) => {};
+
   useEffect(() => {
     if (appId && protonPath === undefined) {
       fetchContent();
@@ -42,20 +44,21 @@ const ProtonFiles: VFC<{appId: string}> = ({appId}) => {
 
   if (protonPath === undefined) return <SteamSpinner />
   else if (protonPath === null) return <Focusable><p>This app does not have proton directory. It could be due to app being Linux native.</p></Focusable>
-  return <Focusable>
-  <Focusable>
+
+  return <Focusable style={{ marginRight: '.5rem', flexDirection: 'column', display: 'flex', gap: '1rem' }}>
     <p><b>Proton Path</b>: {protonPath}</p>
+    <div style={{ marginRight: '.5rem', flexDirection: 'column', display: 'flex', gap: '.5rem' }}>
+      <p style={{ fontWeight: 'bold', fontSize: '1.25em' }}>Launch Executable</p>
+ 
+      <TextField
+        onChange={e => setTargetPath(e.target.value)} 
+        // @ts-ignore
+        ref={pathInputRef}
+      />
+      <DialogButton onClick={() => startPicker(protonPath)}>Open Picker</DialogButton>
+      <DialogButton onClick={() => launchFile(targetPath)}>Launch File</DialogButton>
+    </div>
   </Focusable>
-  <Focusable>
-    <div className={staticClasses.Title}>Launch Executable</div>
-    <TextField
-      onChange={e => setTargetPath(e.target.value)} 
-      // @ts-ignore
-      ref={pathInputRef} 
-    />
-    <DialogButton onClick={() => startPicker(protonPath)}>Open Picker</DialogButton>
-  </Focusable>
-</Focusable>
 }
 
 export default ProtonFiles;

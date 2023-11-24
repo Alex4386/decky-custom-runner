@@ -34,6 +34,8 @@ const GameFiles: VFC<{appId: string}> = ({appId}) => {
     if (res) updatePath(res.realpath);
   }
 
+  const launchFile = async (filePath?: string) => {};
+
   useEffect(() => {
     if (appId && gamePath === undefined) {
       fetchContent();
@@ -42,19 +44,20 @@ const GameFiles: VFC<{appId: string}> = ({appId}) => {
 
   if (gamePath === undefined) return <SteamSpinner />
   else if (gamePath === null) return <Focusable><p>This app does not have valid steam app directory. (non-Steam app?)</p></Focusable>
-  return <Focusable>
-    <Focusable>
-      <p><b>Game Path</b>: {gamePath}</p>
-    </Focusable>
-    <Focusable>
-      <div className={staticClasses.Title}>Launch Executable</div>
+
+  return <Focusable style={{ marginRight: '.5rem', flexDirection: 'column', display: 'flex', gap: '1rem' }}>
+    <p><b>Game Path</b>: {gamePath}</p>
+    <div style={{ marginRight: '.5rem', flexDirection: 'column', display: 'flex', gap: '.5rem' }}>
+      <p style={{ fontWeight: 'bold', fontSize: '1.25em' }}>Launch Executable</p>
+
       <TextField
         onChange={e => setTargetPath(e.target.value)} 
         // @ts-ignore
         ref={pathInputRef} 
       />
       <DialogButton onClick={() => startPicker(gamePath)}>Open Picker</DialogButton>
-    </Focusable>
+      <DialogButton onClick={() => launchFile(targetPath)}>Launch File</DialogButton>
+    </div>
   </Focusable>
 }
 

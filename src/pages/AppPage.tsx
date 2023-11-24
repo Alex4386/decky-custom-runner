@@ -20,12 +20,13 @@ const AppPage: VFC = () => {
 
   const fetchContent = async () => {
     const options = await SteamClient.Apps.GetLaunchOptionsForApp(parseInt(appId))
+    console.log('options', options);
 
     if (options && options.length > 0) setGameLabel(options[0].strGameName);
   }
 
   return <SidebarNavigation
-    title={"App: "+appId}
+    title={gameLabel ?? "App: "+appId}
     showTitle={true}
     pages={[
       {
