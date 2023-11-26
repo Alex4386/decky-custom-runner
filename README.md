@@ -1,6 +1,8 @@
 <h1 align="center">Decky Custom Runner</h1>
 <p align="center">Run launchers or other binaries while in game-mode. <a href="https://youtu.be/OGEbivDFkug">Watch a demo</a></p>
 
+![custom runner](https://github.com/Alex4386/decky-custom-runner/assets/27724108/5d98d46e-9108-43a9-ad66-a2020cd93b5e)
+
 ## What can it do?
 * Run a launcher in some games that require custom launchers
 * Launch configuration utility available in the game folder
