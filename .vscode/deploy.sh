@@ -1,6 +1,6 @@
 #!/bin/bash
 CLI_LOCATION="$(pwd)/cli"
-TARGET_PATH="/home/deck/decky-terminal.zip"
+TARGET_PATH="/home/deck/Custom\\ Runner.zip"
 
 echo "Build and Deployer for DeckyLoader"
 echo "Written by Alex4386"
@@ -14,4 +14,4 @@ echo "Build Complete!"
 sudo chown -R $USER $(pwd)/out
 
 # Custom build routine epilogue
-scp "$(pwd)/out/Decky Terminal.zip" deck@deploy-deck:$TARGET_PATH
+scp "$(pwd)/out/Custom Runner.zip" "deck@deploy-deck:$TARGET_PATH"
