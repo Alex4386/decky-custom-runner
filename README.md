@@ -1,7 +1,5 @@
 <h1 align="center">Decky Custom Runner</h1>
-<p align="center">Launch custom application from game mode with ease!</p>
-
-[Watch a demo](https://youtu.be/OGEbivDFkug)
+<p align="center">Launch custom application from game mode with ease! <a href="https://youtu.be/OGEbivDFkug">Watch a demo</a></p>
 
 ## What can it do?
 * Run a launcher in some games that require custom launchers
