@@ -7,6 +7,7 @@ const ProtonFiles: VFC<{appId: string}> = ({appId}) => {
 
   const [protonPath, setProtonPath] = useState<string | null | undefined>(undefined);
   const [cmdline, setCmdline] = useState<string | undefined>(undefined);
+  const [appLaunched, setAppLaunched] = useState<boolean>(false);
   const pathInputRef: MutableRefObject<any> = useRef();
 
   const fetchContent = async () => {
@@ -49,6 +50,7 @@ const ProtonFiles: VFC<{appId: string}> = ({appId}) => {
     console.log(requestLaunch);
 
     if (requestLaunch.success) {
+      setAppLaunched(true);
       SteamClient.UI.NotifyAppInitialized();
     }
   };
@@ -59,6 +61,12 @@ const ProtonFiles: VFC<{appId: string}> = ({appId}) => {
       fetchContent();
     }
   });
+
+  
+  if (appLaunched) return <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem'}}>
+    <SteamSpinner />
+    <p>Application Launching... Please check STEAM menu for application launch status</p>
+  </div>
 
   if (protonPath === undefined) return <SteamSpinner />
   else if (protonPath === null) return <Focusable><p>This app does not have proton directory. It could be due to app being Linux native.</p></Focusable>

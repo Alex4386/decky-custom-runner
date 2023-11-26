@@ -156,6 +156,10 @@ class Plugin:
     async def launch_command(self, id: int, cmdline: str) -> bool:
         cmdline_parsed = [word.strip('"') for word in re.findall(r'[^"\s]+|"[^"]*"', cmdline)]
         
+        cwd = None
+        if os.path.exists(cmdline_parsed[0]):
+            cwd = os.path.dirname(cmdline_parsed[0])
+
         process = await asyncio.create_subprocess_shell(
             await Plugin.build_reaper_args(
                 self, id,
@@ -166,6 +170,7 @@ class Plugin:
             ),
             shell="/bin/bash",
             env=Plugin._get_terminal_env(self),
+            cwd=cwd if cwd is not None else await Plugin.get_game_dir(self, id),
         )
 
         return True
