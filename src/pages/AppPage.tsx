@@ -1,12 +1,10 @@
 import { VFC, useEffect, useState } from "react";
 import ProtonRunnerGlobal from "../common/global";
-import { DialogButton, Focusable, SidebarNavigation, useParams } from "decky-frontend-lib";
+import { SidebarNavigation, useParams } from "decky-frontend-lib";
 import ProtonFiles from "./app/ProtonFilesPage";
 import GameFiles from "./app/GameFilesPage";
 
 const AppPage: VFC = () => {
-  const serverAPI = ProtonRunnerGlobal.getServer();
-
   // I can't find RouteComponentParams :skull:
   const { appId } = useParams() as any;
 

@@ -1,23 +1,11 @@
 import {
-  ButtonItem,
-  definePlugin,
   DialogButton,
-  Menu,
-  MenuItem,
-  Field,
   Focusable,
   PanelSection,
-  PanelSectionRow,
   Router,
   ServerAPI,
-  showContextMenu,
-  staticClasses,
-  Button,
-  TextField,
-  TextFieldProps,
 } from "decky-frontend-lib";
-import { useEffect, useRef, useState, VFC } from "react";
-import { FaCog, FaPlus, FaTimesCircle } from "react-icons/fa";
+import { useEffect, useState, VFC } from "react";
 import ProtonRunnerGlobal from "./common/global";
 
 const SidePanel: VFC<{

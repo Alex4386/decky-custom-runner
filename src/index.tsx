@@ -1,6 +1,5 @@
 import {
   definePlugin,
-  Patch,
   ServerAPI,
   staticClasses,
 } from "decky-frontend-lib";

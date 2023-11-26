@@ -1,7 +1,7 @@
 import {
-    afterPatch, ServerAPI, SidebarNavigation
+    afterPatch
 } from 'decky-frontend-lib';
-import { ReactElement, VFC } from 'react';
+import { ReactElement } from 'react';
 import ProtonRunnerGlobal from '../../common/global';
 
 const appPageHandler = 

@@ -4,7 +4,7 @@
   "flags": [],
   "publish": {
     "tags": ["proton"],
-    "description": "Run other binaries in proton environment while in game-mode.",
-    "image": "https://github.com/Alex4386/decky-terminal/assets/27724108/35fa0f98-1d74-4689-be35-233ef4ed6cd2"
+    "description": "Run launchers or other binaries while in game-mode.",
+    "image": "https://github.com/Alex4386/decky-custom-runner/assets/27724108/5d98d46e-9108-43a9-ad66-a2020cd93b5e"
   }
 }
