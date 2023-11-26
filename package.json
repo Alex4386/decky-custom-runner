@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Alex4386/decky-proton-runner"
+    "url": "git+https://github.com/Alex4386/decky-custom-runner"
   },
   "keywords": [
     "decky",
@@ -23,9 +23,9 @@
   "author": "Alex4386 <psh010209@gmail.com>",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/Alex4386/decky-proton-runner/issues"
+    "url": "https://github.com/Alex4386/decky-custom-runner/issues"
   },
-  "homepage": "https://github.com/Alex4386/decky-proton-runner#readme",
+  "homepage": "https://github.com/Alex4386/decky-custom-runner#readme",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.1.0",
     "@rollup/plugin-json": "^4.1.0",
